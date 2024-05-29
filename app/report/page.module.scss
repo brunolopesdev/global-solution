@@ -1,0 +1,64 @@
+.main {
+  background-color: #1176ab;
+  height: 100%;
+
+  .reportFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 1;
+    position: relative;
+
+    .reportTitle {
+      font-size: 40px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .form {
+      color: #fff;
+
+      input,
+      textarea {
+        color: #1176ab;
+      }
+
+      [type="file"] {
+        color: #fff;
+      }
+    }
+
+    .scrollLink {
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+
+      &:hover {
+        animation: bounce2 2s ease infinite;
+      }
+    }
+  }
+
+  .mapsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+
+    .subTitle {
+      font-size: 30px;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes bounce2 {
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-30px);}
+	60% {transform: translateY(-15px);}
+}

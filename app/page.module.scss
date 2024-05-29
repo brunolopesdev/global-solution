@@ -1,0 +1,120 @@
+.main {
+  .oceanHero {
+    min-height: 600px;
+    height: 100%;
+    width: 100%;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(#19b3f1),
+      to(#fff)
+    );
+    background: -webkit-linear-gradient(#19b3f1, #fff);
+    background: -o-linear-gradient(#19b3f1, #fff);
+    background: linear-gradient(#19b3f1, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+    .heroTitle {
+      font-size: 56px;
+      font-weight: 800;
+      color: #fff;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #1176ab;
+      text-transform: uppercase;
+      text-align: center;
+
+      .span1 {
+        color: #fff;
+        font-size: 60px;
+    }
+    
+    .span2 {
+        color: #1176ab;
+        font-size: 75px;
+        -webkit-text-stroke-width: .5px;
+      -webkit-text-stroke-color: #ffffff;
+    }
+    
+    .span3 {
+        color: #000000;
+        font-size: 90px;
+      }
+    }
+
+    .scrollLink {
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+
+      &:hover {
+        animation: bounce2 2s ease infinite;
+      }
+    }
+  }
+
+  .oceanSection {
+    background-color: #1176ab;
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+    .title {
+      font-size: 34px;
+      position: relative;
+      z-index: 1;
+      border-bottom: dotted 2px #fff;
+      width: 100%;
+      text-align: center;
+
+      h2 {
+        font-weight: 400;
+
+        strong {
+          font-weight: 800;
+        }
+      }
+    }
+
+    .text {
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
+      text-align: center;
+
+      span {
+        font-size: 14px;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+
+    .scrollLink {
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
+
+      &:hover {
+        animation: bounce2 2s ease infinite;
+      }
+    }
+  }
+}
+
+@keyframes bounce2 {
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-30px);}
+	60% {transform: translateY(-15px);}
+}
