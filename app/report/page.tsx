@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
-  Textarea,
-  Button,
-  Checkbox,
-  Container,
-  Box,
-} from "@chakra-ui/react";
+import { Container, Box, Skeleton } from "@chakra-ui/react";
 
 import Bubbles from "../components/Bubbles";
 import styles from "./page.module.scss";
@@ -22,69 +11,74 @@ import { Map } from "@vis.gl/react-google-maps";
 import Maps from "../components/Map/Maps";
 import Header from "../components/ui/Header";
 import { Link as ScrollLink, Element } from "react-scroll";
-import { FaChevronDown } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaChevronUp,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import axios from "axios";
+import ReportForm from "../components/Forms/ReportForm";
+
+import Slider from "react-slick";
+
+import Card from "../components/ui/Card";
+
+export interface Report {
+  name: string;
+  email: string;
+  message: string;
+  image: string;
+  lat: number;
+  lng: number;
+}
 
 export default function Report() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-    photo: null,
-    acceptLocalization: false,
-    location: [0, 0],
-  });
   const [reports, setReports] = useState<Report[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      photo: file,
-    }));
-  };
-
-  const requestLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setFormData((prevData) => ({
-            ...prevData,
-            location: [position.coords.latitude, position.coords.longitude],
-          }));
+  var settings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    nextArrow: <FaChevronRight color="#fff" size={40} />,
+    prevArrow: <FaChevronLeft color="#fff" size={40} />,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
         },
-        (error) => {
-          console.error("Error obtaining location:", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+        },
+      },
+    ],
   };
 
   const fetchReports = async () => {
+    setLoading(true);
     try {
-      const { data } = await axios.get("/api/reports");
+      const { data } = await axios.get(
+        "https://gs-backend-one.vercel.app/reports"
+      );
 
       setReports(data);
     } catch (err) {
       console.error("Failed to fetch reports:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -95,67 +89,60 @@ export default function Report() {
   return (
     <main className={styles.main}>
       <Bubbles />
-      <Container className={styles.reportFormContainer} centerContent maxW="md">
-        <div className={styles.title}>
-          <h1 className={styles.reportTitle}>make your report</h1>
-        </div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <FormControl>
-            <FormLabel>Name</FormLabel>
-            <Input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              backgroundColor={"#fff"}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              backgroundColor={"#fff"}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Message</FormLabel>
-            <Textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              backgroundColor={"#fff"}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Upload Photo</FormLabel>
-            <Input type="file" onChange={handleFileChange} />
-          </FormControl>
-          <FormControl>
-            <Checkbox
-              name="acceptLocalization"
-              isChecked={formData.acceptLocalization}
-              onChange={handleChange}
-              onClick={requestLocation}
-            >
-              Accept sharing localization
-            </Checkbox>
-          </FormControl>
-          <Button type="submit" colorScheme="blue">
-            Submit
-          </Button>
-        </form>
-        <ScrollLink to="section1" smooth={true} className={styles.scrollLink}>
-          <FaChevronDown color="#fff" size={80} />
-        </ScrollLink>
-      </Container>
+      <Element name="form">
+        <Container
+          className={styles.reportFormContainer}
+          centerContent
+          maxW="md"
+        >
+          <div className={styles.title}>
+            <h1 className={styles.reportTitle}>make your report</h1>
+          </div>
+          <ReportForm />
+          <ScrollLink to="section1" smooth={true} className={styles.scrollLink}>
+            <FaChevronDown color="#fff" size={80} />
+          </ScrollLink>
+        </Container>
+      </Element>
 
       <Element name="section1">
+        {loading ? (
+          <Skeleton height="100vh" />
+        ) : (
+          <Container maxW="2x1" className={styles.sliderContainer}>
+            <h2 className={styles.subTitle}>recent reports</h2>
+            <Box>
+              <Slider {...settings}>
+                {reports.map((report) => (
+                  <Card
+                    name={report.name}
+                    email={report.email}
+                    image={report.image}
+                    message={report.message}
+                  />
+                ))}
+              </Slider>
+            </Box>
+            <Container centerContent>
+              <ScrollLink
+                to="section2"
+                smooth={true}
+                className={styles.scrollLink}
+              >
+                <FaChevronDown color="#fff" size={80} />
+              </ScrollLink>
+            </Container>
+          </Container>
+        )}
+      </Element>
+
+      <Element name="section2">
         <Container maxW="2x1" centerContent className={styles.mapsContainer}>
           <h2 className={styles.subTitle}>browse other users reports</h2>
-          <Maps />
+          <Maps data={reports} />
+          <ScrollLink to="form" smooth={true} className={styles.scrollLink}>
+            <FaChevronUp color="#fff" size={80} />
+          </ScrollLink>
         </Container>
       </Element>
     </main>

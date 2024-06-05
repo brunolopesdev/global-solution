@@ -7,12 +7,13 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import Bubbles from "./components/Bubbles";
 
 import styles from "./page.module.scss";
+import { Container } from "@chakra-ui/react";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <Element id="hero" name="hero">
-        <section className={styles.oceanHero}>
+        <Container maxW={'100vw'} className={styles.oceanHero}>
           <h1 className={styles.heroTitle}>
             <span className={styles.span1}>Watch</span> <br />{" "}
             <span className={styles.span2}>our World's</span> <br />
@@ -21,11 +22,11 @@ export default function Home() {
           <ScrollLink to="section1" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#1176ab" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
 
       <Element id="section1" name="section1">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>
@@ -49,10 +50,10 @@ export default function Home() {
           <ScrollLink to="section2" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
       <Element id="section2" name="section2">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>43 Percent coral reefs left</h2>
@@ -76,10 +77,10 @@ export default function Home() {
           <ScrollLink to="section3" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
       <Element id="section3" name="section3">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>
@@ -112,10 +113,10 @@ export default function Home() {
           <ScrollLink to="section4" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
       <Element id="section4" name="section4">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>
@@ -146,10 +147,10 @@ export default function Home() {
           <ScrollLink to="section5" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
       <Element id="section5" name="section5">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>Sea Ice Extent</h2>
@@ -171,11 +172,11 @@ export default function Home() {
           <ScrollLink to="section6" smooth={true} className={styles.scrollLink}>
             <FaChevronDown color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
 
       <Element id="section6" name="section6">
-        <section className={styles.oceanSection}>
+        <Container maxW={'100vw'} className={styles.oceanSection}>
           <Bubbles />
           <div className={styles.title}>
             <h2>Global Ocean Temperature Anomalies</h2>
@@ -199,7 +200,7 @@ export default function Home() {
           <ScrollLink to="hero" smooth={true} className={styles.scrollLink}>
             <FaChevronUp color="#fff" size={80} />
           </ScrollLink>
-        </section>
+        </Container>
       </Element>
     </main>
   );

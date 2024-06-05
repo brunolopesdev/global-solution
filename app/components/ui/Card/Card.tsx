@@ -1,19 +1,41 @@
-import { Card, CardHeader, CardBody, CardFooter, Flex, Avatar, Box, Heading, Text, IconButton, Image, Button } from "@chakra-ui/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Flex,
+  Avatar,
+  Box,
+  Heading,
+  Text,
+  IconButton,
+  Image,
+  Button,
+} from "@chakra-ui/react";
 
 import { BiLike, BiChat, BiShare } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const CardUI = () => {
+interface Props {
+  name: string;
+  email: string;
+  message: string;
+  image: string;
+}
+
+const CardUI = ({ name, email, message, image }: Props) => {
   return (
-    <Card maxW="md">
+    <Card maxW="md" height={550}>
       <CardHeader>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
-
+            <Avatar
+              name={name}
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+            />
             <Box>
-              <Heading size="sm">Segun Adebayo</Heading>
-              <Text>Creator, Chakra UI</Text>
+              <Heading size="sm">{name}</Heading>
+              <Text>{email}</Text>
             </Box>
           </Flex>
           <IconButton
@@ -25,16 +47,15 @@ const CardUI = () => {
         </Flex>
       </CardHeader>
       <CardBody>
-        <Text>
-          With Chakra UI, I wanted to sync the speed of development with the
-          speed of design. I wanted the developer to be just as excited as the
-          designer to create a screen.
-        </Text>
+        <Text>{message}</Text>
       </CardBody>
       <Image
         objectFit="cover"
-        src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Chakra UI"
+        src={
+          `https://gs-backend-one.vercel.app/images/${image}` ||
+          "https://via.placeholder.com/150"
+        }
+        alt={message}
       />
 
       <CardFooter

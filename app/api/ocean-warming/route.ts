@@ -1,36 +1,24 @@
-import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-
-interface OceanData {
-    data: any;
-    description: string;
-}
+import { NextResponse } from "next/server";
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
-    try {
-        const { data }: AxiosResponse<OceanData> = await axios.get(
-            "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/ocean/12/1/1850-2024.json?trend=true&trend_base=10&begtrendyear=1880&endtrendyear=2024"
-        );
-        const stringifyOceanObj: string = JSON.stringify(data.data);
-        const parseToObject: any = JSON.parse(stringifyOceanObj);
+  if (req.method !== "GET") {
+    res.setHeader("Allow", ["GET"]);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 
-        // cors config
-        res.setHeader("Access-Control-Allow-Credentials", "true");
-        res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "GET");
-        res.setHeader(
-            "Access-Control-Allow-Headers",
-            "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-        );
-        // caching the response for one day (just max one slow request per day)
-        res.setHeader("Cache-Control", "s-maxage=43200");
-        res.status(200).json({
-            error: null,
-            result: parseToObject,
-            description: data.description,
-        });
-    } catch (error) {
-        res.status(500).send({ result: null, error });
+  try {
+    const response = await fetch(
+      "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/ocean/12/1/1850-2024.json?trend=true&trend_base=10&begtrendyear=1880&endtrendyear=2024"
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
-};
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Failed to fetch reports:", error);
+    return NextResponse.json({ error: "Failed to fetch reports" });
+  }
+}

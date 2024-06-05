@@ -159,12 +159,12 @@ export const OceanWarmingChart = () => {
   // const fetchOceanWarmingData = async () => {
   //   try {
   //     const { data } = await axios.get(
-  //       "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/ocean/12/1/1850-2024.json?trend=true&trend_base=10&begtrendyear=1880&endtrendyear=2024"
+  //       "/api/ocean-warming"
   //     );
 
   //     console.log("data", transformOceanWarmData(data));
 
-  //     setOceanWarmingData(transformOceanWarmData(data));
+  //     // setOceanWarmingData(transformOceanWarmData(data));
   //   } catch (err) {
   //     console.error(err);
   //   }
