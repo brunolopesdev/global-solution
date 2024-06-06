@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextApiResponse } from "next";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") {
-    res.setHeader("Allow", ["GET"]);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const response = await fetch(
-      "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/ocean/12/1/1850-2024.json?trend=true&trend_base=10&begtrendyear=1880&endtrendyear=2024"
+      "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series/globe/ocean/12/1/1850-2024.json?trend=true&trend_base=10&begtrendyear=1880&endtrendyear=2024",
+      {
+        headers: {
+          allow: "GET",
+        },
+      }
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

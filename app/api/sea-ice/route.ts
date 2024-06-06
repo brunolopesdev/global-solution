@@ -1,15 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "GET") {
-    res.setHeader("Allow", ["GET"]);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-
+export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const response = await fetch(
-      "https://www.ncei.noaa.gov/access/monitoring/snow-and-ice-extent/sea-ice/G/5/data.json"
+      "https://www.ncei.noaa.gov/access/monitoring/snow-and-ice-extent/sea-ice/G/5/data.json",
+      {
+        headers: {
+          allow: "GET",
+        },
+      }
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");

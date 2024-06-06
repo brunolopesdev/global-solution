@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src={logo} width={130} height={130} alt="Ocean Watch Logo" />
+        <Image src={logo} width={130} height={130} alt="Coast Keeper Logo" />
         <span>OceanWatch</span>
       </div>
       <nav className={styles.nav}>
