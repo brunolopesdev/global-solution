@@ -85,7 +85,12 @@ const ReportForm = () => {
 
       const response = await axios.post(
         "https://gs-backend-one.vercel.app/reports",
-        formDataToSend
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       
       Swal.fire({

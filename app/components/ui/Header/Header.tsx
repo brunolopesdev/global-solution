@@ -9,7 +9,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Image src={logo} width={130} height={130} alt="Coast Keeper Logo" />
-        <span>OceanWatch</span>
+        <span>CoastKeeper</span>
       </div>
       <nav className={styles.nav}>
         <ul>
