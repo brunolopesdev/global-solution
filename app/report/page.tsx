@@ -6,10 +6,7 @@ import Bubbles from "../components/Bubbles";
 import styles from "./page.module.scss";
 import { useEffect, useState } from "react";
 
-import GoogleMapReact from "google-map-react";
-import { Map } from "@vis.gl/react-google-maps";
 import Maps from "../components/Map/Maps";
-import Header from "../components/ui/Header";
 import { Link as ScrollLink, Element } from "react-scroll";
 import {
   FaChevronDown,
@@ -62,6 +59,7 @@ export default function Report() {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
+          dots: true,
         },
       },
     ],
@@ -70,9 +68,7 @@ export default function Report() {
   const fetchReports = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(
-        "https://gs-backend-one.vercel.app/reports"
-      );
+      const { data } = await axios.get("/api/reports");
 
       setReports(data);
     } catch (err) {
@@ -105,36 +101,38 @@ export default function Report() {
         </Container>
       </Element>
 
-      <Element name="section1">
-        {loading ? (
-          <Skeleton height="100vh" />
-        ) : (
-          <Container maxW="2x1" className={styles.sliderContainer}>
-            <h2 className={styles.subTitle}>recent reports</h2>
-            <Box>
-              <Slider {...settings}>
-                {reports.map((report) => (
-                  <Card
-                    name={report.name}
-                    email={report.email}
-                    image={report.image}
-                    message={report.message}
-                  />
-                ))}
-              </Slider>
-            </Box>
-            <Container centerContent>
-              <ScrollLink
-                to="section2"
-                smooth={true}
-                className={styles.scrollLink}
-              >
-                <FaChevronDown color="#fff" size={80} />
-              </ScrollLink>
+      {reports && (
+        <Element name="section1">
+          {loading ? (
+            <Skeleton height="100vh" />
+          ) : (
+            <Container maxW="2x1" className={styles.sliderContainer}>
+              <h2 className={styles.subTitle}>recent reports</h2>
+              <Box className={styles.sliderBox}>
+                <Slider {...settings}>
+                  {reports.map((report) => (
+                    <Card
+                      name={report.name}
+                      email={report.email}
+                      image={report.image}
+                      message={report.message}
+                    />
+                  ))}
+                </Slider>
+              </Box>
+              <Container centerContent>
+                <ScrollLink
+                  to="section2"
+                  smooth={true}
+                  className={styles.scrollLink}
+                >
+                  <FaChevronDown color="#fff" size={80} />
+                </ScrollLink>
+              </Container>
             </Container>
-          </Container>
-        )}
-      </Element>
+          )}
+        </Element>
+      )}
 
       <Element name="section2">
         <Container maxW="2x1" centerContent className={styles.mapsContainer}>

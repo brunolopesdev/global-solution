@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
-    const response = await fetch("http://localhost:3333/reports");
+    const response = await fetch("https://gs-backend-one.vercel.app/reports");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

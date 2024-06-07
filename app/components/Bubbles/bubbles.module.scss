@@ -26,6 +26,11 @@
   top: 10%;
   left: 10%;
   animation: 4s linear infinite;
+
+  @media (max-width: 425px) {
+    height: 40px;
+    width: 40px;
+  }
 }
 div .dot {
   height: 10px;

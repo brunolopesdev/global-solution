@@ -43,6 +43,12 @@
       padding: 5rem 15px;
     }
 
+    .sliderBox {
+      @media (max-width: 425px) {
+        margin-top: 100%;
+      }
+    }
+
     .subTitle {
       font-size: 30px;
       color: #fff;

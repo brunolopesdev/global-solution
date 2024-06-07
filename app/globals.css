@@ -17,3 +17,9 @@
 .slick-prev {
   left: 15px !important;
 }
+
+@media (max-width: 768px) {
+  .slick-dots {
+    bottom: -60px !important;
+  }
+}

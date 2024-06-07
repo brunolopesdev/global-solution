@@ -9,7 +9,6 @@ interface Props {
 }
 
 const Maps = ( { data }: Props ) => {
-  console.log('data', data)
   const [markerRef, marker] = useMarkerRef();
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

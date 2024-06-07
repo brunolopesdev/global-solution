@@ -15,6 +15,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import styles from "./report-form.module.scss";
 
 const ReportForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,8 +34,6 @@ const ReportForm = () => {
       ...prevData,
       [name]: value,
     }));
-
-    console.log('form', formData)
   };
 
   const handleFileChange = (e: any) => {
@@ -47,7 +46,6 @@ const ReportForm = () => {
 
   const requestLocation = () => {
     if (navigator.geolocation) {
-      console.log(navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setFormData((prevData) => ({
@@ -55,8 +53,6 @@ const ReportForm = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           }));
-
-          console.log('form', formData)
         },
         (error) => {
           console.error("Error obtaining location:", error);
@@ -70,9 +66,10 @@ const ReportForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setLoading(true)
+
     try {
       const formDataToSend = new FormData();
-      // Append other form fields
       formDataToSend.append("name", formData.name);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("message", formData.message);
@@ -98,6 +95,8 @@ const ReportForm = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
+
+      setLoading(false)
 
     } catch (err) {
       Swal.fire({
@@ -158,8 +157,8 @@ const ReportForm = () => {
           </Checkbox>
         </div>
       </FormControl>
-      <Button type="submit" colorScheme="blue" w={'100%'} marginTop={'10px'} textTransform={'uppercase'}>
-        Submit
+      <Button type="submit" colorScheme="blue" w={'100%'} marginTop={'10px'} textTransform={'uppercase'} disabled={loading}>
+        {loading ? "Sending..." : "Submit"}
       </Button>
     </form>
   );

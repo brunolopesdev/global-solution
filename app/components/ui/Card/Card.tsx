@@ -52,7 +52,7 @@ const CardUI = ({ name, email, message, image }: Props) => {
       <Image
         objectFit="cover"
         src={
-          `https://gs-backend-one.vercel.app/images/${image}` ||
+          `https://gs-backend-one.vercel.app/images${image}` ||
           "https://via.placeholder.com/150"
         }
         alt={message}
