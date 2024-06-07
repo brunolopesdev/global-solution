@@ -17,6 +17,11 @@
       color: #fff;
       font-weight: 600;
       text-transform: uppercase;
+
+      @media (max-width: 425px) {
+        font-size: 26px;
+        text-align: center;
+      }
     }
 
     .scrollLink {
@@ -43,12 +48,6 @@
       padding: 5rem 15px;
     }
 
-    .sliderBox {
-      @media (max-width: 425px) {
-        margin-top: 100%;
-      }
-    }
-
     .subTitle {
       font-size: 30px;
       color: #fff;
@@ -56,6 +55,11 @@
       text-align: center;
       margin-bottom: 4rem;
       text-transform: uppercase;
+
+      @media (max-width: 425px) {
+        font-size: 26px;
+        text-align: center;
+      }
     }
 
     .scrollLink {
@@ -82,6 +86,11 @@
       font-weight: 600;
       text-align: center;
       text-transform: uppercase;
+
+      @media (max-width: 425px) {
+        font-size: 26px;
+        text-align: center;
+      }
     }
 
     .scrollLink {

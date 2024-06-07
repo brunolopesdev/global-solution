@@ -1,28 +1,72 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../../public/ocean-watch-1.jpg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useEffect, useState } from "react";
 
 import styles from "./header.module.scss";
+import logo from "../../../../public/ocean-watch-1.jpg";
 
 const Header = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Image src={logo} width={130} height={130} alt="Coast Keeper Logo" />
+        <Image
+          src={logo}
+          width={isMobile ? 60 : 130}
+          height={isMobile ? 60 : 130}
+          alt="Coast Keeper Logo"
+        />
         <span>CoastKeeper</span>
       </div>
-      <nav className={styles.nav}>
-        <ul>
-          <li className={styles.navItem}>
-            <Link href="/">Home</Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/report">Report Environmental Issues</Link>
-          </li>
-        </ul>
-      </nav>
+      {isMobile ? (
+        <>
+          <GiHamburgerMenu
+            className={styles.hamburgerIcon}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          {isOpen && (
+            <nav className={styles.mobileNav}>
+              <ul>
+                <li className={styles.navItem}>
+                  <Link href="/">Home</Link>
+                </li>
+                <li className={styles.navItem}>
+                  <Link href="/report">Report Environmental Issues</Link>
+                </li>
+              </ul>
+            </nav>
+          )}
+        </>
+      ) : (
+        <nav className={styles.nav}>
+          <ul>
+            <li className={styles.navItem}>
+              <Link href="/">Home</Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link href="/report">Report Environmental Issues</Link>
+            </li>
+          </ul>
+        </nav>
+      )}
     </header>
   );
-}
+};
 
 export default Header;

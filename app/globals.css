@@ -18,8 +18,8 @@
   left: 15px !important;
 }
 
-@media (max-width: 768px) {
-  .slick-dots {
-    bottom: -60px !important;
+@media (max-width: 425px) {
+  .slick-next, .slick-prev {
+    display: none;
   }
 }

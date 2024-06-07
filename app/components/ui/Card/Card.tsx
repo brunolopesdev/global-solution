@@ -12,6 +12,7 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import { BiLike, BiChat, BiShare } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -24,8 +25,21 @@ interface Props {
 }
 
 const CardUI = ({ name, email, message, image }: Props) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <Card maxW="md" height={550}>
+    <Card maxW="md" height={isMobile ? 'auto' : 550}>
       <CardHeader>
         <Flex>
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -52,10 +66,12 @@ const CardUI = ({ name, email, message, image }: Props) => {
       <Image
         objectFit="cover"
         src={
-          `https://gs-backend-one.vercel.app/images${image}` ||
-          "https://via.placeholder.com/150"
+          image
+            ? `https://gs-backend-one.vercel.app/images/${image}`
+            : "https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg"
         }
         alt={message}
+        height={200}
       />
 
       <CardFooter

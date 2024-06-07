@@ -33,6 +33,7 @@ export interface Report {
 export default function Report() {
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  
 
   var settings = {
     dots: false,
@@ -68,7 +69,11 @@ export default function Report() {
   const fetchReports = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("/api/reports");
+      const { data } = await axios.get(
+        "https://gs-backend-one.vercel.app/reports"
+      );
+
+      console.log("data", data)
 
       setReports(data);
     } catch (err) {
@@ -101,7 +106,7 @@ export default function Report() {
         </Container>
       </Element>
 
-      {reports && (
+      {reports.length > 0 && (
         <Element name="section1">
           {loading ? (
             <Skeleton height="100vh" />

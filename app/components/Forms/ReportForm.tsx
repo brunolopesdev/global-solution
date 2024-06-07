@@ -139,6 +139,8 @@ const ReportForm = () => {
           onChange={handleChange}
           backgroundColor={"#fff"}
           required
+          maxLength={250}
+          placeholder="Max 250 characters"
         />
       </FormControl>
       <FormControl>

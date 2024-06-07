@@ -9,7 +9,7 @@
   z-index: 2;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    // flex-direction: column;
     gap: 1rem;
     padding: 1rem 0;
   }
@@ -25,44 +25,93 @@
     }
 
     span {
-        font-weight: 900;
-        color: #fff;
-        font-size: 1.2rem;
+      font-weight: 900;
+      color: #fff;
+      font-size: 1.2rem;
+
+      @media (max-width: 425px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .hamburgerIcon {
+    display: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 2rem;
+
+    @media (max-width: 768px) {
+      display: block;
     }
   }
 
   .nav {
-    
     ul {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        list-style: none;
-        gap: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      list-style: none;
+      gap: 2rem;
 
-        @media (max-width: 500px) {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
+      @media (max-width: 500px) {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .navItem {
+        a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 1.2rem;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #1176ab;
+            color: #fff;
+          }
         }
+      }
+    }
+  }
+
+  .mobileNav {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      z-index: 1;
+      text-align: center;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
         .navItem {
+          padding: 1rem;
 
-            a {
-                text-decoration: none;
-                color: #fff;
-                font-size: 1.2rem;
-                font-weight: 600;
-                padding: 0.5rem 1rem;
-                border-radius: 5px;
-                transition: all 0.3s ease-in-out;
+          a {
+            color: #fff;
+            font-size: 1.2rem;
 
-                &:hover {
-                    background-color: #1176ab;
-                    color: #fff;
-                }
+            &:hover {
+              background-color: #1176ab;
             }
+          }
         }
+      }
     }
   }
 }
