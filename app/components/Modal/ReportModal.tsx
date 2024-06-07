@@ -31,7 +31,7 @@ const ReportModal = ({
           <div>
             <Image
               src={
-                `https://gs-backend-one.vercel.app/images/${report?.image}` ||
+                `${report?.image}` ||
                 "https://via.placeholder.com/150"
               }
               alt="report image"

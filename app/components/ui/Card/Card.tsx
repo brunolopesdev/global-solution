@@ -67,7 +67,7 @@ const CardUI = ({ name, email, message, image }: Props) => {
         objectFit="cover"
         src={
           image
-            ? `https://gs-backend-one.vercel.app/images/${image}`
+            ? `${image}`
             : "https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg"
         }
         alt={message}
