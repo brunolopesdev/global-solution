@@ -65,48 +65,64 @@ const ReportForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    setLoading(true)
+    setLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("message", formData.message);
-      formDataToSend.append("lat", formData.lat.toString());
-      formDataToSend.append("lng", formData.lng.toString());
+      let imageUrl = "";
 
-      if (formData.image !== null) {
-        formDataToSend.append("image", formData.image);
+      if (formData.image) {
+        const imgurFormData = new FormData();
+        imgurFormData.append("image", formData.image);
+
+        const imgurResponse = await axios.post(
+          "https://api.imgur.com/3/image",
+          imgurFormData,
+          {
+            headers: {
+              Authorization: "Client-ID c07474c64c85cd6",
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        imageUrl = imgurResponse.data.data.link;
       }
+
+      const reportData = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        lat: formData.lat,
+        lng: formData.lng,
+        image: imageUrl,
+      };
 
       const response = await axios.post(
         "https://gs-backend-one.vercel.app/reports",
-        formDataToSend,
+        reportData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
-      
+
       Swal.fire({
         title: "Report submitted successfully",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
-      setLoading(false)
-
+      setLoading(false);
     } catch (err) {
       Swal.fire({
         title: "Error submitting report",
         icon: "error",
         confirmButtonText: "Ok",
       });
+      setLoading(false);
     }
   };
-
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -159,7 +175,14 @@ const ReportForm = () => {
           </Checkbox>
         </div>
       </FormControl>
-      <Button type="submit" colorScheme="blue" w={'100%'} marginTop={'10px'} textTransform={'uppercase'} disabled={loading}>
+      <Button
+        type="submit"
+        colorScheme="blue"
+        w={"100%"}
+        marginTop={"10px"}
+        textTransform={"uppercase"}
+        disabled={loading}
+      >
         {loading ? "Sending..." : "Submit"}
       </Button>
     </form>
