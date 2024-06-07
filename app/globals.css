@@ -15,7 +15,7 @@
 }
 
 .slick-prev {
-  left: 15px !important;
+  left: 100px !important;
 }
 
 @media (max-width: 425px) {

@@ -47,11 +47,25 @@ export default function Report() {
     prevArrow: <FaChevronLeft color="#fff" size={40} />,
     responsive: [
       {
-        breakpoint: 992,
+        breakpoint: 1026,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 2,
-          initialSlide: 2,
+          initialSlide: 1,
+          centerPadding: "150px",
+          arrows: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          centerPadding: "130px",
+          dots: true,
+          arrows: false
         },
       },
       {

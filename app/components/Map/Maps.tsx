@@ -3,12 +3,14 @@ import { Box, Button } from "@chakra-ui/react";
 import { Map, Marker, useMarkerRef } from "@vis.gl/react-google-maps";
 import { useEffect, useState } from "react";
 import ReportModal from "../Modal/ReportModal";
+import useDeviceType from "@/app/hooks/useDeviceType";
 
 interface Props {
   data: Report[];
 }
 
 const Maps = ( { data }: Props ) => {
+  const { isMobile } = useDeviceType(); 
   const [markerRef, marker] = useMarkerRef();
   const [selectedReport, setSelectedReport] = useState<Report | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +33,7 @@ const Maps = ( { data }: Props ) => {
   }, [marker]);
 
   return (
-    <Box w="90%" h="500px">
+    <Box w="90%" h={isMobile ? '300px' : '500px'}>
       <Map
         defaultCenter={{ lat: 22.54992, lng: 0 }}
         defaultZoom={3}

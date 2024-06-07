@@ -1,3 +1,4 @@
+import useDeviceType from "@/app/hooks/useDeviceType";
 import {
   Card,
   CardHeader,
@@ -25,18 +26,7 @@ interface Props {
 }
 
 const CardUI = ({ name, email, message, image }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { isMobile } = useDeviceType();
 
   return (
     <Card maxW="md" height={isMobile ? 'auto' : 550}>

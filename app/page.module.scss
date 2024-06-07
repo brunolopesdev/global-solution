@@ -32,6 +32,10 @@
         color: #fff;
         font-size: 60px;
 
+        @media (max-width: 1024px) {
+          font-size: 50px;
+        }
+
         @media (max-width: 425px) {
           font-size: 40px;
         }
@@ -47,6 +51,10 @@
         -webkit-text-stroke-width: 0.5px;
         -webkit-text-stroke-color: #ffffff;
 
+        @media (max-width: 1024px) {
+          font-size: 50px;
+        }
+
         @media (max-width: 425px) {
           font-size: 40px;
         }
@@ -59,6 +67,10 @@
       .span3 {
         color: #000000;
         font-size: 90px;
+
+        @media (max-width: 1024px) {
+          font-size: 50px;
+        }
 
         @media (max-width: 425px) {
           font-size: 40px;
@@ -100,6 +112,10 @@
       width: 100%;
       text-align: center;
 
+      @media (max-width: 1024px) {
+          font-size: 22px;
+        }
+
       @media (max-width: 425px) {
           font-size: 20px;
         }
@@ -119,6 +135,10 @@
       z-index: 1;
       max-width: 1140px;
       text-align: center;
+
+      @media (max-width: 1024px) {
+          font-size: 14px;
+        }
 
       @media (max-width: 425px) {
           font-size: 14px;

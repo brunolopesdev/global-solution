@@ -1,5 +1,6 @@
 "use client";
 
+import useDeviceType from "@/app/hooks/useDeviceType";
 import Image from "next/image";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -9,19 +10,8 @@ import styles from "./header.module.scss";
 import logo from "../../../../public/ocean-watch-1.jpg";
 
 const Header = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useDeviceType();
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <header className={styles.header}>

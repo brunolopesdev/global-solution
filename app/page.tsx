@@ -8,8 +8,12 @@ import Bubbles from "./components/Bubbles";
 
 import styles from "./page.module.scss";
 import { Container } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import useDeviceType from "./hooks/useDeviceType";
 
 export default function Home() {
+  const { isTablet } = useDeviceType();
+
   return (
     <main className={styles.main}>
       <Element id="hero" name="hero">
@@ -20,7 +24,7 @@ export default function Home() {
             <span className={styles.span3}>environmental challenges</span>
           </h1>
           <ScrollLink to="section1" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#1176ab" size={80} />
+            <FaChevronDown color="#1176ab" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -48,7 +52,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="section2" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#fff" size={80} />
+            <FaChevronDown color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -75,7 +79,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="section3" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#fff" size={80} />
+            <FaChevronDown color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -111,7 +115,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="section4" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#fff" size={80} />
+            <FaChevronDown color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -145,7 +149,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="section5" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#fff" size={80} />
+            <FaChevronDown color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -170,7 +174,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="section6" smooth={true} className={styles.scrollLink}>
-            <FaChevronDown color="#fff" size={80} />
+            <FaChevronDown color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>
@@ -198,7 +202,7 @@ export default function Home() {
             </p>
           </div>
           <ScrollLink to="hero" smooth={true} className={styles.scrollLink}>
-            <FaChevronUp color="#fff" size={80} />
+            <FaChevronUp color="#fff" size={isTablet ? 40 : 80} />
           </ScrollLink>
         </Container>
       </Element>

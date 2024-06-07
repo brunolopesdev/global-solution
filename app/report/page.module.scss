@@ -12,11 +12,20 @@
     z-index: 1;
     position: relative;
 
+    @media (max-width: 1024px) {
+      margin-top: 1rem;
+    }
+
     .reportTitle {
       font-size: 40px;
       color: #fff;
       font-weight: 600;
       text-transform: uppercase;
+
+      @media (max-width: 1024px) {
+        font-size: 26px;
+        text-align: center;
+      }
 
       @media (max-width: 425px) {
         font-size: 26px;
@@ -79,6 +88,14 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+
+    @media (max-width: 1024px) {
+      margin-top: 8rem;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
 
     .subTitle {
       font-size: 30px;
