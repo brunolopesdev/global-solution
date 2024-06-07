@@ -31,18 +31,42 @@
       .span1 {
         color: #fff;
         font-size: 60px;
-    }
-    
-    .span2 {
+
+        @media (max-width: 425px) {
+          font-size: 40px;
+        }
+
+        @media (max-width: 320px) {
+          font-size: 30px;
+        }
+      }
+
+      .span2 {
         color: #1176ab;
         font-size: 75px;
-        -webkit-text-stroke-width: .5px;
-      -webkit-text-stroke-color: #ffffff;
-    }
-    
-    .span3 {
+        -webkit-text-stroke-width: 0.5px;
+        -webkit-text-stroke-color: #ffffff;
+
+        @media (max-width: 425px) {
+          font-size: 40px;
+        }
+
+        @media (max-width: 320px) {
+          font-size: 30px;
+        }
+      }
+
+      .span3 {
         color: #000000;
         font-size: 90px;
+
+        @media (max-width: 425px) {
+          font-size: 40px;
+        }
+
+        @media (max-width: 320px) {
+          font-size: 30px;
+        }
       }
     }
 
@@ -76,6 +100,10 @@
       width: 100%;
       text-align: center;
 
+      @media (max-width: 425px) {
+          font-size: 20px;
+        }
+
       h2 {
         font-weight: 400;
 
@@ -91,6 +119,10 @@
       z-index: 1;
       max-width: 1140px;
       text-align: center;
+
+      @media (max-width: 425px) {
+          font-size: 14px;
+        }
 
       span {
         font-size: 14px;
@@ -114,7 +146,17 @@
 }
 
 @keyframes bounce2 {
-	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-	40% {transform: translateY(-30px);}
-	60% {transform: translateY(-15px);}
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
 }
